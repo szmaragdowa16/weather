@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .date{
+
+      
+        line-height: 25px;
+    }
+
+    h1, h2, h3, span{
+        margin:0;
+    }
+    h1{
+font-size: 16rem;
+    }
+
+h2{
+    font-size:3rem;
+}
+h3{
+    font-size: 1.4rem;
+}
+span{
+    font-size: 6rem;
+}
+    .container{
+        height:100vh;
+        max-width: 500px;
+        border:1px solid black;
+        margin: 0 auto;
+        position: relative;
+        text-align: center;
+        padding: 25px;
+       display: grid;
+       grid-template-rows: 20% 10%;
+    
+    }
+    .degrees{
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: center;
+        margin-left: 2rem;
+    }
+    input{
+       width: 490px;
+        font-size: 22px;
+        text-align: center;
+        font-weight: 700;
+        border: 1px solid lightslategrey;
+     
+    }
+    button{
+        position: absolute;
+        right: 0px;
+        height:30px;
+        width: 90px;
+      background-color: white;
+      border: 1px solid gray;
+        
+    }
+    ul{
+        list-style: none;
+    }
+    li{
+        line-height: 25px;
+        display:inline;
+       
+   
+    }
+    
+    </style>
+</head>
+
+
+<body>
+    <div class='container'>
+            <input type='text' placeholder='Lokalizacja' />
+            <button>szukaj</button>
+        <h2 id ='loc'>Poznań</h2>
+        <div class='middle'>
+            <img src="" alt="icon" id="icon">
+            <div class="degrees">
+            <h1 id="temp">19</h1>
+            <span>&#176; </span>
+        </div>
+        <h3 id="desc">Sunny</h3>
+        </div>
+    </div>
+
+      
+       
+        <!-- <p class='loc'></p> -->
+        <!-- <p class='date'></p> -->
+
+       <ul class='dat'>dat</ul>
+       <ul class='temp'>temp</ul>
+
+       
+
+        <!-- <p id='demo'>Ola</p>
+
+        <p id='demo1'>Ola</p>
+        <p id='demo2'>Ola</p> -->
+    </div>
+
+
+    <script>
+        var button = document.querySelector('button');
+
+        button.onclick = function () {
+            function calculate(kelvin) {
+                return Math.ceil(kelvin - 273.15);
+
+            }
+
+            function addElement(value) {
+                // tworzenie elementu listy
+                var li = document.createElement('li');
+                // uzupełnienie nowo utworzonego elementu trescia
+                li.innerText = value;
+                // wybieram liste z drzewa DOM
+                var ul = document.querySelector('.dat');
+                // dodaj nowo utworzony element do listy
+                ul.appendChild(li)
+            };
+            function addElement_temp(value) {
+                // tworzenie elementu listy
+                var li = document.createElement('li');
+                // uzupełnienie nowo utworzonego elementu trescia
+                li.innerText = value;
+                // wybieram liste z drzewa DOM
+                var ul = document.querySelector('.temp');
+                // dodaj nowo utworzony element do listy
+                ul.appendChild(li)
+            };
+           console.log(addElement_temp)
+            
+
+                var input = document.querySelector('input');
+                var loc = input.value.trim();
+                if (loc !== "") {
+                   
+
+                    fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + loc + '&appid=dd3d922d54f71b5ebf0654c2c36c6a06')
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (myJson) {
+
+                            if (myJson.cod === '200') {
+                            
+
+                  
+
+
+                    for (var i = 0; i < myJson.list.length; i++) {
+                        // var obj = addElement_temp( calculate(myJson.list[i].main.temp) +' '+ ( myJson.list[i].dt_txt) +' '+(myJson.list[i].sys.pod))
+                        
+                        // var dat = addElement( myJson.list[i].dt_txt);
+                        
+                        var temp = addElement( myJson.list[i].main.temp);
+                        // + ' ' + ' , ' + ' '  + ' '  + addElement(calculate(myJson.list[i].main.temp))+ ' ' + ' , ' ;
+                        // var day = calculate(addElement_temp(myJson.list[i].main.temp));
+
+                        // var dat = addElement( myJson.list[i]);
+                     
+                      console.log(dat);
+
+                            // console.log(myJson.list[i].dt_txt);
+
+
+
+                       
+                        // var tempmin = addElement (calculate(myJson.list[i].main.temp_min));
+                        // var tempmax = addElement (calculate(myJson.list[i].main.temp_max));
+
+                        // document.querySelector('#demo').innerHTML += 'Data' + ': ' + dat + ' ' + 'Temperatura' + ' ' + temp + ',' + day + ' ,' + "</br>";
+                        // działa
+                        
+                       
+                    };
+                      
+                   
+
+                        document.querySelector('#loc').innerHTML = loc.toUpperCase();
+                        document.querySelector('#temp').innerHTML = myJson.list[i].main.temp;
+
+
+                        // document.querySelector('.date').innerHTML += 'Data' + ': ' + dat + ' ' + 'Temperatura' + ' ' + obj + ',' + day + ' ,' + "</br>";
+
+
+                        // console.log(myJson);
+
+                       
+                    }
+
+                    
+
+                });
+
+            } else {
+                alert('nie podano lokalizacji')
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

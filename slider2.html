@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+        display: none;
+      }
+
+      div:nth-child(1) {
+        background: yellow;
+      }
+
+      div:nth-child(2) {
+        background: green;
+      }
+
+      div:nth-child(3) {
+        background: red;
+      }
+
+      .show {
+          display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="show"></div>
+    <div></div>
+    <div></div>
+
+    <button onclick="show(0)">1</button> 
+    <button onclick="show(1)">2</button>
+    <button onclick="show(2)">3</button>
+
+    <script>
+      function show(index) {
+        // // dodawanie klasy
+        // $('div').addClass('show'); // jquery
+        // element.classList.add('show'); // js
+        // // usuwanie klasy
+        // $('div').removeClass('show'); // jquery
+        // element.classList.remove('show'); // js
+        // // przelaczanie klasy
+        // $('div').toggleClass('show'); // jquery
+        // element.classList.toggle('show'); // js
+
+
+        // ukryj wszystkie div'y usuwajac klase show
+        document.querySelectorAll('div').forEach(function(element) {
+          element.classList.remove('show');
+        });
+
+        // pokaz wskazany div dodajac klase show
+        document.querySelectorAll('div')[index].classList.add('show');
+      }
+    </script>
+  </body>
+</html>

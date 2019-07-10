@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+</head>
+
+<body>
+
+    <div></div>
+    <script>
+        var loc = 'Warszawa';
+        function calculate(kelvin){
+            return Math.ceil(kelvin-273.15);
+        }
+        fetch('https://api.openweathermap.org/data/2.5/weather?q=' + loc + '&appid=ae76d0efed32d9f29c4d54a5738b80ca')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJson) {
+                // console.log((myJson.main.temp));
+                document.querySelector('div').innerHTML = 'Temperatura w ' + loc + ' : ' + calculate(myJson.main.temp)+ ' C ';
+                console.log(myJson)
+            });
+
+// dla całej pogody zmieniam weather na forecast
+            //   fetch('https://api.openweathermap.org/data/2.5/forecast?q=Warsaw&appid=ae76d0efed32d9f29c4d54a5738b80ca')
+            //   .then(function(response) {
+            //     return response.json();
+            //   })
+            //   .then(function(myJson) {
+            //     console.log((myJson.main.temp));
+            //     // document.querySelector('div').innerHTML='Temperatura w Warszawie: ' + myJson.main.temp + 'K';
+            //   });
+    </script>
+</body>
+
+</html>

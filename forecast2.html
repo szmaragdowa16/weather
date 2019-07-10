@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+        
+        
+        .container{
+        height:100vh;
+        max-width: 600px;
+      
+        margin: 0 auto;
+     
+        text-align: center;
+        padding: 25px;
+    }
+    .wrapper{
+        width: 100px;
+        height: 90px;
+        float: left;
+    }
+    
+   .jeden{
+       width: 600px;
+       height: 20px;
+
+       font-size: 28px;
+       text-align: center;
+     
+  
+       }
+       .dwa{
+       width: 100px;
+       height: 100px;
+       float: left;
+       }
+       .trzy{
+       width: 100px;
+       height: 100px;
+       float: left;
+       }
+       .cztery{
+       width: 100px;
+       height: 100px;
+       float: left;
+       }
+       .pięć{
+       width: 100px;
+       height: 100px;
+       float: left;
+       }
+       .szesc{
+       width: 100px;
+       height: 100px;
+       float: left;
+       }
+
+   
+    input{
+       width: 600px;
+     
+        font-size: 22px;
+        text-align: center;
+        font-weight: 700;
+        border: 1px solid lightslategrey;
+       margin-bottom: 10px;
+     
+    }
+    button{
+     
+    
+        height:30px;
+        width: 90px;
+     
+      background-color: white;
+      border: 1px solid gray;
+        
+    }
+    li{
+        display:inline;
+        list-style: none;
+        font-size: 26px;
+        
+    }
+        
+        
+	</style>
+
+</head>
+
+<body>
+
+        <div class="container">
+    <input type="text" placeholder="Lokalizacja..." />  <button>Szukaj</button>
+    
+
+
+    <h3 class='dzisiaj'></h3>
+
+
+    <div class="jeden"></div>
+     <ul></ul>
+
+
+   
+   
+    <div class='wrapper'>
+    <h3 class='jutro'></h3>
+    <div class="dwa"></div>
+    </div>
+    <div class='wrapper'>
+    <h3 class="pojutrze"></h3>
+    <div class="trzy"></div>
+    </div>
+    <div class='wrapper'>
+    <h3 class="data_cztery"></h3>
+    <div class="cztery"></div>
+    </div>
+    <div class='wrapper'>
+    <h3 class="data_piec"></h3>
+    <div class="piec"></div>
+</div>
+<div class='wrapper'>
+    <h3 class="data_szesc"></h3>
+    <div class="szesc"></div>
+    </div>
+    </div>
+
+
+    
+
+    <script>
+        // funkcja konwertujaca K na C
+        function calculate(kelvin) {
+            // zaokraglaj wynik w gore
+            return Math.ceil(kelvin - 272.15);
+        }
+
+        function addElement(value) {
+            // tworzenie elementu listy
+            var li = document.createElement('li');
+            // uzupełnienie nowo utworzonego elementu trescia
+            li.innerText = value;
+            // wybieram liste z drzewa DOM
+            var ul = document.querySelector('ul');
+            // dodaj nowo utworzony element do listy
+            ul.appendChild(li);
+        }
+
+        // wybieram przycisk z drzewa DOM
+        var button = document.querySelector('button');
+        // nasluchiwanie na klikniecie w button
+        button.onclick = function () {
+            // wybieram input z drzewa DOM
+            var input = document.querySelector('input');
+            // sprawdzam czy input nie ma pustej wartosci
+            if (input.value.trim() !== '') {
+                // pobranie danych z serwera (open weather map)
+                fetch(
+                    'https://api.openweathermap.org/data/2.5/forecast?q=' +
+                    input.value +
+                    '&appid=dd3d922d54f71b5ebf0654c2c36c6a06'
+                )
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (jsonData) {
+                        // sprawdzam czy istnieja dane do wyswietlenia
+                        if (jsonData.cod === '200') {
+                            jsonData.list.forEach(function (item) {
+
+
+              addElement(item.dt_txt+ ' '+ ': ' +(calculate(item.main.temp) + ' ℃'));
+                                console.log(convertYTDate(item.dt_txt));
+                                console.log(convertYTDate(new Date()));
+     
+                              //   podział daty i godziny
+
+function convertYTDate(){
+
+var date = new Date();
+var day = date.getDate();
+var hours = date.getHours();
+var minutes = date.getMinutes();
+var seconds = date.getSeconds();
+var monthIndex = date.getMonth()+1;
+var year = date.getFullYear();
+console.log(day + ' ' + monthIndex + ' ' + year + ' ' + hours+ ':' + minutes) ;
+
+
+}
+
+
+
+
+
+
+
+
+
+                                // function convertYTDate(YTDateTime, format) {
+                                //     let todayTime = new Date(YTDateTime);
+                                //     var month = todayTime.getMonth() + 1;
+                                //     var day = todayTime.getDate();
+                                //     var year = todayTime.getFullYear();
+                                //     var hours = todayTime.getHours();
+                                //     var minutes = todayTime.getMinutes();
+                                //     var seconds = todayTime.getSeconds();
+                                //     if (format = 'date') {
+                                //         return year + '-' + month + '-' + day;
+
+                                //     }
+                                //     if (format = 'time') {
+                                //         return hours + ':' + minutes + ':' + seconds;
+                                //     }
+                                //     return false;
+                                // }
+
+
+                                // function convertYTime(YTDateTime, format) {
+                                //     let todayTime = new Date(YTDateTime);
+                                //     var month = todayTime.getMonth() + 1;
+                                //     var day = todayTime.getDate();
+                                //     var year = todayTime.getFullYear();
+                                //     var hours = todayTime.getHours();
+                                //     var minutes = todayTime.getMinutes();
+                                //     var seconds = todayTime.getSeconds();
+
+                                //     if (format = 'time') {
+                                //         return hours + ':' + minutes + '' + seconds;
+                                //     }
+                                //     return false;
+                                // }
+
+
+
+
+
+                                //  addElement(convertYTDate(item.dt_txt) + ' ' + convertYTime(item.dt_txt) + ': ' +(calculate(item.main.temp) + ' ℃'));
+                                // console.log(convertYTDate(item.dt_txt));
+                                // console.log(convertYTDate(new Date()));
+
+
+                                // var date1 = convertYTDate(item.dt_txt);
+                                // var time = convertYTime(item.dt_txt);
+                              
+                                // var date2 = convertYTDate(new Date());
+                                // var temp = calculate(item.main.temp);
+                                // var temp_min = calculate(item.main.temp_min);
+                                // var temp_max = calculate(item.main.temp_max);
+                                // // jutro
+                                // var today = new Date();
+                                // var tomorrow = new Date();
+                                // tomorrow.setDate(1);
+                                // var day = new Date();
+
+
+                                // var nextDay = (new Date(day));
+
+                                // nextDay.setDate(day.getDate() + 1);
+                                // var Day_2 = (new Date(day));
+                                // Day_2.setDate(day.getDate() + 2);
+                                
+                                // var Day_3=(new Date(day));
+                                // Day_3.setDate(day.getDate() + 3);
+                               
+
+                                // var Day_4=(new Date(day));
+                                // Day_4.setDate(day.getDate() + 4);
+                                // console.log(Day_4);
+
+                                // var Day_5=(new Date(day));
+                                // Day_5.setDate(day.getDate() + 5);
+                                // console.log(Day_5);
+
+
+
+
+
+
+
+                                // if (date1  === date2 ) {
+                                //     // console.log('dzisiaj');
+                                   
+                                  
+                                //     document.querySelector('.dzisiaj').innerHTML =  convertYTDate(date1) ;
+
+                                //    addElement( + ' ' + time+ ' '  + temp_max +' ℃' +'  ');
+                                   
+                                    
+                                    
+                                // }
+                                // else if (date1 == convertYTDate(nextDay)) {
+                                //     // tworzę listę li
+
+                                  
+                                //     document.querySelector('.jutro').innerHTML = convertYTDate(date1);
+
+                                //     // console.log('jutro');
+                                //     document.querySelector('.dwa').innerHTML += + ' ' + time+ ' '  + temp +' ℃' + '<br>';
+                                    
+                                // } else if (date1 == convertYTDate(Day_2)) {
+                                //     document.querySelector('.pojutrze').innerHTML = convertYTDate(date1);
+
+                                //     document.querySelector('.trzy').innerHTML += + ' ' + time+ ' '  + temp +' ℃' + '<br>';
+
+                                // } else if (date1 == convertYTDate(Day_3)) {
+                                //     document.querySelector('.data_cztery').innerHTML = convertYTDate(date1);
+                                //     document.querySelector('.cztery').innerHTML += + ' ' + time+ ' '  + temp +' ℃' + '<br>';
+
+                                // }else if (date1 == convertYTDate(Day_4)) {
+                                //     document.querySelector('.data_piec').innerHTML = convertYTDate(date1);
+                                //     document.querySelector('.piec').innerHTML += + ' ' + time+ ' '  + temp +' ℃' + '<br>';
+
+                                // }else if (date1 == convertYTDate(Day_5)) {
+                                //     document.querySelector('.data_szesc').innerHTML = convertYTDate(date1);
+                                //     document.querySelector('.szesc').innerHTML += + ' ' + time+ ' '  + temp +' ℃' + '<br>';
+                                // }
+
+
+                                // else {
+
+                                //     //   console.log('pojutrze');
+                                // }
+                                // return false
+
+
+
+                                //                                 var d = new Date();
+                                //                                 var m= d.getMonth();
+                                //                                 var da=d.getDate();
+                                //                                 var h=d.getHours();
+                                //                                 var mi=d.getMinutes();
+                                //                                 var s=d.getSeconds();
+
+
+                                //                                 var x = new Date(document.querySelector ("ul"));
+                                //                                 if (d > x) {
+                                //     // ** the user-entconsole.logered date is in the past **
+                                //     console.log('przeszłość')
+                                // }
+                                // else if (d < x) {
+                                //     // ** the user-entered date is in the future **
+                                //     console.log('ok')
+                                // }
+                                // else {
+                                //     // ** the user-entered date is the current date **
+                                //     console.log('nie')
+                                // }
+
+
+
+
+
+
+
+
+
+
+                            });
+
+
+
+
+
+
+
+                        } else {
+                            // dane nie istnieja
+                            alert('Upppssss...');
+                        }
+                    })
+
+                    .catch(function (error) {
+                        // tutaj osblugujemy bledy popelnione w wywolaniu zwrotnym powyzej
+                        // czyli w funkcji .then(...)
+                        console.log('Nasz error:', error);
+                    });
+            }
+        };
+    </script>
+</body>
+
+</html>

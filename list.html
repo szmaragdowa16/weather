@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+    <ul></ul>
+
+    <script>
+        // tworzenie elementu li
+        var li = document.createElement('li');
+        // wypelniam nowo utworzony element trascia
+        li.innerText = 'Zadanie 1';
+        // // dodaje stylowanie
+        li.style.color = 'yellow';
+        li.style.backgroundColor = 'green';
+        // // dodaje jakies zdarzenie do nowo utworzonego elementu
+        li.onclick = function() {
+            // po kliknieciu usun ten element z listy
+            ul.removeChild(li);
+        }
+        // dodac go do istniejacej listy
+        var ul = document.querySelector('ul');
+        ul.appendChild(li);
+    </script>
+</body>
+</html>

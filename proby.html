@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+</head>
+
+<body>
+
+    <div></div>
+    <script>
+var monthNames = [
+"January", "February", "March",
+"April", "May", "June", "July",
+"August", "September", "October",
+"November", "December"
+];
+var date = new Date('2019-02-01 03:00:00');
+var day = date.getDate();
+var monthIndex = date.getMonth();
+var year = date.getFullYear();
+console.warn(day + ' ' + monthNames[monthIndex] + ' ' + year);
+
+
+
+        </script>
+</body>
+
+</html>

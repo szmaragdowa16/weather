@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" placeholder="Lokalizacja..." /> <button>Szukaj</button>
+    <div></div>
+    <script>
+      var button = document.querySelector('button');
+      button.onclick = function() {
+        var input = document.querySelector('input');
+        var loc = input.value.trim();
+
+        function calculate(kelvin) {
+          return Math.ceil(kelvin - 272.15);
+        }
+
+        if (loc !== '') {
+          fetch(
+            'https://api.openweathermap.org/data/2.5/weather?q=' +
+              loc +
+              '&appid=ae76d0efed32d9f29c4d54a5738b80ca'
+          )
+            .then(function(response) {
+              return response.json();
+            })
+            .then(function(myJson) {
+              if (myJson.cod === 200) {
+                document.querySelector('div').innerText =
+                  'Temperatura w ' +
+                  loc +
+                  ': ' +
+                  calculate(myJson.main.temp) +
+                  'C';
+              } else {
+                alert(myJson.message);
+              }
+            });
+        } else {
+          alert('Upssss... Nie podano lokalizacji.');
+        }
+      };
+
+      // dane ze starwars api
+      // fetch('https://swapi.co/api/people/1/')
+      //   .then(function(response) {
+      //     return response.json();
+      //   })
+      //   .then(function(myJson) {
+      //     console.log('Dane z api: ', myJson);
+      //   });
+
+      // fetch('https://api.openweathermap.org/data/2.5/forecast?q=berlin&appid=ae76d0efed32d9f29c4d54a5738b80ca')
+      //   .then(function(response) {
+      //     return response.json();
+      //   })
+      //   .then(function(myJson) {
+      //     console.log('Dane z api: ', myJson);
+      //   });
+    </script>
+  </body>
+</html>

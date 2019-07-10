@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+    <title>Document</title>
+
+    <style>
+
+
+        .container{
+       
+       
+      
+        margin: 0 auto;
+     
+        text-align: center;
+        padding: 20px 0;
+        font-family: 'Lato', sans-serif;
+    }
+   
+    /* .wrapper{
+        margin-top: 0px;
+        width: 20%;
+      
+        float: left;
+    } */
+    .h5{
+        font-size: 18px;
+        font-weight: 700;
+    }
+   
+      .second{
+          padding-top: 30px;
+         
+         
+      }
+      .dzisiaj{
+        font-size: 28px;
+        font-weight: 700;
+      }
+      .temp{
+          padding-top: 50px;
+          padding-bottom: 50px;
+          font-size: 55px;
+      }
+      .tree{
+        padding-top: 30px; 
+        font-size: 18px;
+        padding-top: 50px;
+       
+      }
+      
+       .icon img{
+           
+           width:130%;
+           height: auto;
+           
+       }
+       .p{
+           font-size: 22px;
+      
+       }
+      
+   
+    input{
+       
+       width: 600px;
+       height: 50px;
+     color:gray;
+        font-size: 26px;
+        text-align: center;
+        font-weight: 700;
+     border: 2px solid gray;
+      margin: 20px 0;
+    } 
+   
+    
+    .jeden{
+    
+       height: 30px;
+       padding-bottom: 20px;
+        text-align: center;  
+    }
+    
+    li{
+        display:inline;
+        list-style: none;
+        font-size: 26px;
+        text-align: center;  
+        margin-right: 14px;
+      
+       
+    }
+    .alert{
+        font-size:26px;
+       font-style: inherit;
+        color:red;
+    }
+
+    .next_day{
+        margin-top: 20px;
+    }
+     
+   body{
+   
+       background-image: url( tloo.jpg);
+     background-repeat: no-repeat;
+     width:100%;
+      
+   }
+   
+
+        
+        
+	</style>
+
+</head>
+
+<body>
+
+
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-2">
+                <div class="icon"> </div>
+               
+
+            </div>
+            <div class="col-sm-4 second ">
+                <div class='dzisiaj'></div>
+                <div class='temp'></div>
+
+            </div>
+            <div class="col-sm-2 tree">
+                    <div class="desc"></div>
+                <div class="clouds"></div>
+                <div class="wind"></div>
+            </div>
+            <div class="col-sm-2"></div>
+
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col-sm-12">
+                <p class='jeden p'></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <ul class='mylist'> </ul>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="alert"></div>
+                <input type="text" placeholder="wpisz miasto">
+
+                <button type="button" class="btn btn-raised btn-secondary">Szukaj</button>
+            </div>
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-2">
+                <div class='wrapper'>
+                    <p class='image2'></p>
+                    <h5 class='jutro h5'></h5>
+                    <div class="temp_min"></div>
+                    <div class="dwa pole"></div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class='wrapper'>
+                    <p class='image3'></p>
+                    <h5 class="pojutrze h5"></h5>
+
+                    <div class="trzy pole"></div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class='wrapper'>
+                    <p class='image4'></p>
+                    <h5 class="data_cztery h5"></h5>
+                    <div class="cztery pole"></div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class='wrapper'>
+                    <p class='image5'></p>
+                    <h5 class="data_piec h5"></h5>
+                    <div class="piec pole"></div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class='wrapper'>
+
+                    <p class='image6'></p>
+                    <h5 class="data_szesc h5"></h5>
+                    <div class="szesc pole"></div>
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+        // funkcja konwertujaca K na C
+        function calculate(kelvin) {
+            // zaokraglaj wynik w gore
+            return Math.ceil(kelvin - 272.15);
+        }
+
+        function addElement(value) {
+            // tworzenie elementu listy
+            var li = document.createElement('li');
+            // uzupełnienie nowo utworzonego elementu trescia
+
+            li.innerText = value;
+
+            // wybieram liste z drzewa DOM
+            var ul = document.querySelector('ul');
+            // dodaj nowo utworzony element do listy
+            ul.appendChild(li);
+
+
+        }
+
+
+        // wybieram przycisk z drzewa DOM
+        var button = document.querySelector('button');
+        // nasluchiwanie na klikniecie w button
+        button.onclick = function () {
+            // wybieram input z drzewa DOM
+            var input = document.querySelector('input');
+
+            // sprawdzam czy input nie ma pustej wartosci
+            if (input.value.trim() !== '') {
+                // pobranie danych z serwera (open weather map)
+                fetch(
+                    'https://api.openweathermap.org/data/2.5/forecast?q=' +
+                    input.value +
+                    '&appid=dd3d922d54f71b5ebf0654c2c36c6a06'
+                )
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (jsonData) {
+                        // sprawdzam czy istnieja dane do wyswietlenia
+                        if (jsonData.cod === '200') {
+                            jsonData.list.forEach(function (item, index) {
+                               
+                                //   podział daty i godziny
+                                function convertYTDate(YTDateTime, format) {
+                                    let todayTime = new Date(YTDateTime);
+                                    var month = todayTime.getMonth() + 1;
+                                    var day = todayTime.getDate();
+                                    var year = todayTime.getFullYear();
+                                    if (format = 'date') {
+                                        return year + '-' + month + '-' + day;
+                                    }
+
+                                    return false;
+                                }
+
+                                function convertYTime(YTDateTime, format) {
+                                    let todayTime = new Date(YTDateTime);
+                                    var hours = todayTime.getHours();
+                                    var minutes = todayTime.getMinutes();
+                                    var seconds = todayTime.getSeconds();
+                                    if (format = 'time') {
+                                        return hours + ':' + minutes + '' + seconds;
+                                    }
+                                    return false;
+                                }
+
+
+
+                                // pobieranie danych
+                                var date1 = convertYTDate(item.dt_txt);
+
+                                var time = convertYTime(item.dt_txt);
+                                var time1 = new Date().getHours();
+
+
+                                var date2 = convertYTDate(new Date());
+                                var temp = calculate(item.main.temp);
+
+                                // podział na kolejne dni
+
+                                var day = new Date();
+
+                                var nextDay = (new Date(day));
+                                nextDay.setDate(day.getDate() + 1);
+
+
+                                var Day_2 = (new Date(day));
+                                Day_2.setDate(day.getDate() + 2);
+
+                                var Day_3 = (new Date(day));
+                                Day_3.setDate(day.getDate() + 3);
+
+                                var Day_4 = (new Date(day));
+                                Day_4.setDate(day.getDate() + 4);
+                                // console.log(Day_4);
+
+                                var Day_5 = (new Date(day));
+                                Day_5.setDate(day.getDate() + 5);
+                                // console.log(Day_5);
+                                var d = new Date(date1);
+                                var day = d.getDate();
+                                //  słownie dzień tygodnia i miesiąc
+                                var weekday = new Array(7);
+                                weekday[0] = "Niedziela";
+                                weekday[1] = "Poniedziałek";
+                                weekday[2] = "Wtorek";
+                                weekday[3] = "Środa";
+                                weekday[4] = "Czwartek";
+                                weekday[5] = "Piątek";
+                                weekday[6] = "Sobota";
+                               
+                               
+                                var n = weekday[d.getDay()];
+                                var monthNames = [
+                                    "Styczeń", "Luty", "Marzec",
+                                    "Kwiecień", "Maj", "Czerwiec", "Lipiec",
+                                    "Sierpień", "Wrzesień", "Październik",
+                                    "Listopad", "Grudzień"
+                                ];
+                                var date = new Date(date1);
+                                var day = date.getDate();
+                                var monthIndex = date.getMonth();
+                                var year = date.getFullYear();
+                                var months = monthNames[monthIndex];
+
+                                // bieący dzień
+                                if (date1 == date2) {
+                                    var desc = item.weather["0"].description;
+                                    var icon = item.weather["0"].icon;
+                                    var wind = item.wind.speed;
+                                    var clouds = item.clouds.all;
+                                    var iconUrl = '<img src=http://openweathermap.org/img/w/' + icon + ".png>";
+                                    var id = item.weather["0"].id;
+                                    var opis = document.querySelector('.image2');
+                                    var temp = calculate(item.main.temp);
+                                    document.querySelector('.dzisiaj').innerHTML = 'Dziś,' + ' ' + n + ' ' + '</br>' + day + ' ' + months;
+
+                                    if (index == 0) {
+                                        document.querySelector('.icon').innerHTML = iconUrl;
+                                        document.querySelector('.desc').innerHTML = desc;
+
+                                        document.querySelector('.wind').innerHTML = 'Szybkość wiatru:' + ' ' + wind + " " + 'km/h';
+                                        document.querySelector('.clouds').innerHTML = 'Zachmurzenie:' + ' ' + clouds + " " + '%';
+                                        document.querySelector('.temp').innerHTML = temp + ' ' + ' ℃';
+
+                                    }
+
+                                    if (index != 0) {
+                                        document.querySelector('.jeden').innerHTML = 'w najbliszej przyszłości ...'
+                                        addElement(' ' + time + ' ' + temp +  ' ℃' + '  ');
+                                       
+                                        
+                                    }
+                                }
+
+                                // jutro
+                                if (date1 == convertYTDate(nextDay)) {
+                                    // tworzę listę li
+                                    var desc = item.weather["0"].description;
+                                    var icon = item.weather["0"].icon;
+                                    var iconUrl = '<img src=http://openweathermap.org/img/w/' + icon + ".png>";
+                                    document.querySelector('.jutro').innerHTML = n + ' ' + '</br>' + day + ' ' + months;
+                                    document.querySelector('.image2').innerHTML = iconUrl;
+                                    document.querySelector('.dwa').innerHTML += time + ' ' + temp + ' ℃' + '<br>';
+                                    
+                                    
+                                 console.log(typeof temp)
+                                    // pojutrze
+                                } else if (date1 == convertYTDate(Day_2)) {
+                                    var desc = item.weather["0"].description;
+                                    var icon = item.weather["0"].icon;
+                                    var iconUrl = '<img src=http://openweathermap.org/img/w/' + icon + ".png>";
+                                    document.querySelector('.pojutrze').innerHTML = n + ' ' + '</br>' + day + ' ' + months;
+                                    document.querySelector('.image3').innerHTML = iconUrl;
+                                    document.querySelector('.trzy').innerHTML += time + ' ' + temp + ' ℃' + '<br>';
+                                    // za trzy dni
+                                } else if (date1 == convertYTDate(Day_3)) {
+                                    var desc = item.weather["0"].description;
+                                    var icon = item.weather["0"].icon;
+                                    var iconUrl = '<img src=http://openweathermap.org/img/w/' + icon + ".png>";
+                                    document.querySelector('.data_cztery').innerHTML = n + ' ' + '</br>' + day + ' ' + months;
+                                    document.querySelector('.image4').innerHTML = iconUrl;
+                                    document.querySelector('.cztery').innerHTML += time + ' ' + temp + ' ℃' + '<br>';
+                                    // za cztery dni
+                                } else if (date1 == convertYTDate(Day_4)) {
+                                    var icon = item.weather["0"].icon;
+                                    var iconUrl = '<img src=http://openweathermap.org/img/w/' + icon + ".png>";
+                                    var desc = item.weather["0"].description;
+                                    document.querySelector('.data_piec').innerHTML = n + ' ' + '</br>' + day + ' ' + months;
+                                    document.querySelector('.image5').innerHTML = iconUrl;
+                                    document.querySelector('.piec').innerHTML += time + ' ' + temp + ' ℃' + '<br>';
+                                    // za pięć dni
+                                } else if (date1 == convertYTDate(Day_5)) {
+                                    var desc = item.weather["0"].description;
+                                    var icon = item.weather["0"].icon;
+                                    var iconUrl = '<img src=http://openweathermap.org/img/w/' + icon + ".png>";
+                                    document.querySelector('.data_szesc').innerHTML = n + ' ' + '</br>' + day + ' ' + months;
+                                    document.querySelector('.image6').innerHTML = iconUrl;
+
+                                    document.querySelector('.szesc').innerHTML += time + ' ' + temp + ' ℃' + '<br>';
+                                }
+
+                                else {
+
+                                    //   console.log('pojutrze');
+                                }
+                                return false
+
+                            });
+
+
+                        } else {
+                            // dane nie istnieja
+                            document.querySelector('.alert').innerHTML = 'dane nie istnieją, spróbuj ponownie';
+
+                        }
+                    })
+
+                    .catch(function (error) {
+                        // tutaj osblugujemy bledy popelnione w wywolaniu zwrotnym powyzej
+                        // czyli w funkcji .then(...)
+                        console.log('Nasz error:', error);
+                    });
+            }
+        };
+    </script>
+</body>
+
+</html>

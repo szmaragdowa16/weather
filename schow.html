@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+      }
+
+      div:nth-child(1) {
+        background: yellow;
+      }
+
+      div:nth-child(2) {
+        background: green;
+        display: none;
+      }
+
+      div:nth-child(3) {
+        background: red;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <div></div>
+    <div></div>
+
+    <button onclick="show(0)">1</button> 
+    <button onclick="show(1)">2</button>
+    <button onclick="show(2)">3</button>
+
+    <script>
+      function show(index) {
+        // ukryj wszystkie div'y
+        document.querySelectorAll('div').forEach(function(element) {
+          element.style.display = 'none';
+        });
+
+        // pokaz wskazany div
+        document.querySelectorAll('div')[index].style.display = 'block';
+      }
+    </script>
+  </body>
+</html>
